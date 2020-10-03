@@ -1,0 +1,13 @@
+<h1>Recent Comment created</h1>
+<p>
+  <h2>Commenter</h2>
+  <%= @comment.commenter %>
+<p>
+
+<p>
+  <h2>Body</h2>
+  <%= @comment.body %>
+<p>
+
+<%= link_to 'Edit', edit_article_comment_path(@article, @comment) %>
+<%= link_to 'Back', article_path(@article) %>

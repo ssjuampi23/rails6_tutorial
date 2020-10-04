@@ -10,24 +10,10 @@
 <p>
 
 <h2>Comments</h2>
+<%= render @article.comments %>
 
-<% @article.comments.each do |comment| %>
-
-  <p>
-    <h3>Commenter</h3>
-    <%= comment.commenter %>
-  <p>
-
-  <p>
-    <h3>Body</h3>
-    <%= comment.body %>
-  <p>
-
-  <%= link_to 'Show Comment', article_comment_path(@article.id, comment.id) %>
-
-<% end %>
-
-<p></p>
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
 
 <%= link_to 'New Comment', new_article_comment_path(@article) %>
 <%= link_to 'Edit', edit_article_path(@article) %>

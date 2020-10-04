@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  http_basic_authenticate_with name: 'jp', password: 'secret', except: [:show, :index]
 
   def index
     @articles = Article.all
@@ -16,9 +17,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def create # <ActionController::Parameters {"title"=>"www", "text"=>"12122"} permitted: false>
-    # render plain: params[:article].inspect
-    # @article = Article.new(params[:article]) WITHOUT Strong Params
+  def create
     @article = Article.new(article_params)
 
     if @article.save

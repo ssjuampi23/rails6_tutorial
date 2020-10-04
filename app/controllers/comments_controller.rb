@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  http_basic_authenticate_with name: 'jp', password: 'secrete', only: 'destroy'
+
   def index
   end
 
@@ -19,13 +21,8 @@ class CommentsController < ApplicationController
 
   def create
     load_article
-    @comment = @article.comments.new(comment_params)
-
-    if @comment.save
-      redirect_to article_comment_path(@article, @comment)
-    else
-      render 'new'
-    end
+    @comment = @article.comments.create(comment_params)
+    redirect_to article_path(@article)
   end
 
   def update
@@ -40,6 +37,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    load_article
+    @comment = @article.comments.find(params[:id])
+    @comment.destroy
+    redirect_to article_path(@article)
   end
 
   private
